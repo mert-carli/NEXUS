@@ -1,0 +1,11 @@
+{
+  "name": "nexus-root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && venv\\Scripts\\activate && uvicorn app.main:app --reload --port 8000",
+    "build:frontend": "cd frontend && npm run build",
+    "test:backend": "cd backend && venv\\Scripts\\pytest"
+  }
+}
