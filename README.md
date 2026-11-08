@@ -579,8 +579,9 @@ npm run dev
 
 ## Testlerin Çalıştırılması (Testing)
 
-- **Backend Testleri (`pytest`):** `cd backend && pytest -v`
+- **Backend Testleri (`pytest`):** `cd backend && copy .env.example .env && pytest -v` (29 birim ve API entegrasyon testi; bellek içi SQLite kullanır)
 - **Frontend Testleri (`vitest`):** `cd frontend && npm test`
+- **Frontend Üretim Derlemesi (`vite`):** `cd frontend && npx vite build`
 ---
 
 # 18. Vizyon
