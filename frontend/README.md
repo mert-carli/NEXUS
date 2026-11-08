@@ -1,32 +1,32 @@
-# React + TypeScript + Vite
+# NEXUS Frontend — React 19 & Monaco Codebase Intelligence UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This directory contains the frontend interface for **NEXUS**, built with **React 19**, **TypeScript**, **Vite**, **Tailwind CSS v4**, **Zustand**, **TanStack Query**, and **Monaco Editor**.
 
-Currently, two official plugins are available:
+## Core Modules (`src/`)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Pages (`src/pages/`):**
+  - `Dashboard.tsx` — Project health metrics, indexing status, and recent activity timeline
+  - `CodeExplorer.tsx` — File tree navigation, AST symbol search, and Monaco code viewer
+  - `Assistant.tsx` — Local RAG chat interface and context-aware codebase queries
+  - `Settings.tsx` — Local LLM (Ollama), RAG chunking, Git, and Nexus Guard configuration
+- **Key Components (`src/components/`):**
+  - `CodebaseIntelligence.tsx` — Symbol and dependency relationship explorer
+  - `ChangeCenter.tsx` & `DiffEditorCard.tsx` — Controlled side-by-side diff preview and approval workflow
+  - `NexusGuard.tsx` — Security validation and risk inspection before applying AI edits
+  - `CommandPalette.tsx` — Keyboard-first navigation (`Ctrl+K`)
 
-## React Compiler
+## Development & Testing
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the Oxlint configuration
+# Start Vite development server
+npm run dev
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+# Run unit tests (Vitest + Testing Library)
+npm test
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Type-check and build production bundle
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.

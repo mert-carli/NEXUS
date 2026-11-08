@@ -515,17 +515,73 @@ NEXUS;
 
 ---
 
-# 17. Kurulum
+# 17. Teknik Yığın, Klasör Yapısı ve Kurulum (Installation & Testing)
 
-Projeyi bilgisayarınıza klonlayın:
+## Teknoloji Yığını (Tech Stack)
 
+| Katman | Kullanılan Teknolojiler |
+| :--- | :--- |
+| **Backend (`backend/`)** | Python 3.11+, FastAPI, SQLAlchemy, Alembic, ChromaDB (Vektör Veritabanı), GitPython, Pydantic Settings, HTTPX |
+| **Frontend (`frontend/`)** | React 19, TypeScript, Vite 8, Tailwind CSS v4, Monaco Editor (`@monaco-editor/react`), Zustand, TanStack Query, Lucide React |
+| **Yerel Yapay Zekâ** | Ollama (`http://localhost:11434`) & yapılandırılabilir AI Provider katmanı |
+| **Test Altyapısı** | Backend: `pytest` (`backend/tests/`) · Frontend: `vitest` & React Testing Library (`frontend/src/components/__tests__/`) |
+
+## Klasör Yapısı (Directory Structure)
+
+```text
+NEXUS/
+├── backend/
+│   ├── alembic/                # Veritabanı şema göçleri (migrations)
+│   ├── app/
+│   │   ├── api/v1/             # REST uç noktaları (projects, files, chat, edit, settings, health)
+│   │   ├── core/               # Uygulama yapılandırması ve ayar kayıt defteri
+│   │   ├── db/                 # SQLAlchemy SQLite veritabanı oturumu
+│   │   ├── models/ & schemas/  # ORM modelleri ve Pydantic şemaları
+│   │   └── services/           # Chunker, VectorDB (Chroma), RAG, Agent, Git & Security Validator
+│   ├── tests/                  # Pytest birim ve API entegrasyon testleri
+│   ├── .env.example            # Örnek ortam değişkenleri
+│   └── requirements.txt        # Python bağımlılıkları
+├── frontend/
+│   ├── src/
+│   │   ├── components/         # CodebaseIntelligence, ChangeCenter, NexusGuard, DiffEditorCard vb.
+│   │   ├── pages/              # Dashboard, CodeExplorer, Assistant, Settings
+│   │   ├── services/           # Backend API istemcisi (api.ts)
+│   │   └── store/              # Zustand durum yönetimi (project, agent, settings, ui)
+│   └── package.json            # Frontend bağımlılıkları ve betikleri
+├── start.bat                   # Windows tek tıkla başlatıcı (Backend + Frontend)
+└── start-dev.ps1               # PowerShell geliştirici başlatma betiği
+```
+
+## Kurulum ve Çalıştırma Adımları
+
+### 1. Depoyu Klonlayın
 ```bash
-git clone https://github.com/mert-carli/NEXUS
+git clone https://github.com/mert-carli/NEXUS.git
 cd NEXUS
 ```
 
-Kurulum ve çalıştırma adımları için proje içerisindeki kurulum dokümantasyonunu takip edin.
+### 2. Backend Kurulumu (FastAPI)
+```powershell
+cd backend
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+uvicorn app.main:app --reload --port 8000
+```
 
+### 3. Frontend Kurulumu (React + Vite)
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+## Testlerin Çalıştırılması (Testing)
+
+- **Backend Testleri (`pytest`):** `cd backend && copy .env.example .env && pytest -v` (29 birim ve API entegrasyon testi; bellek içi SQLite kullanır)
+- **Frontend Testleri (`vitest`):** `cd frontend && npm test`
+- **Frontend Üretim Derlemesi (`vite`):** `cd frontend && npx vite build`
 ---
 
 # 18. Vizyon

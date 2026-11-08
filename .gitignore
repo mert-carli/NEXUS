@@ -31,3 +31,6 @@ chroma_db/
 
 # Alembic generated (keep only alembic/ dir, not __pycache__)
 alembic/__pycache__/
+
+# TypeScript incremental build info
+*.tsbuildinfo
